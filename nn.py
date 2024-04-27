@@ -137,6 +137,21 @@ class Conv:
                 new_image_array[i][j] = np.squeeze(scipy.signal.fftconvolve(x[i], Parameter.calling[self][0][j], mode='valid'), axis=0) + Parameter.calling[self][1][j]
         return new_image_array
 
+        '''
+        # Below is the implementation of convolution layer with computational graph, commented because not computational graph is not provided for all layers yet
+        matrix = x
+        kernel = self.filter_array
+        num_images, matrix_z, matrix_y, matrix_x = matrix.shape
+        num_kernels, kernel_z, kernel_y, kernel_x = kernel.shape
+        result_z, result_x, result_y = num_kernels, matrix_x - kernel_x + 1, matrix_y - kernel_y + 1
+        new_matrix = Tensor.sliding_window_view(matrix, kernel_z, kernel_y, kernel_x)
+
+        outz = new_matrix.shape[1]
+        outy = new_matrix.shape[2]
+        outx = new_matrix.shape[3]
+        result = new_matrix.reshape(num_images * outx * outy, kernel_z * kernel_y * kernel_x) @ kernel.reshape(-1, num_kernels)
+        return result.reshape(num_images, result_z, result_y, result_x) + Parameter.calling[self][1]
+        '''
 
 class RNN:
     '''
