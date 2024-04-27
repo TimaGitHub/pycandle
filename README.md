@@ -54,6 +54,7 @@ PyCandle
 - gives the oportunity to precisely tune Cross Entropy Loss with L2, L1 regularization parameters
 - gives the oportunity to learn what's under the hood of deep learning algorithms (especcialy at back propagation)
 - provides access to pytorch api without the need for users to adapt to a new library
+- provided the ability to compute gradients with computational graph, see pycandle.Tensor()
 
 ### Examples
 open examples.py to look at various types of NN
@@ -86,6 +87,6 @@ class SimpleNet(nn.Module):
 ```
 
 ## To-Do List
-- [ ] provide all computations  using a computational graph and mimic pytorch.tensor() (in progress)
+- [x] provide all computations  using a computational graph and mimic pytorch.tensor() (done, see tensor.py, providing computational graph for all layers is left
 - [ ] add LSTM, GRU, Transformers, GAN
-- [ ] add switching between NumPy and CuPy
+- [x] add switching between NumPy and CuPy (numpy on gpu)
