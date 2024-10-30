@@ -98,7 +98,7 @@ class Tensor:
         if self.requires_grad == True:
             temp.append(('mul', self, lambda x: x * other.value))
         if other.requires_grad == True:
-            temp.append(('mul', other, lambda x: x * other.value))
+            temp.append(('mul', other, lambda x: x * self.value))
         local_gradients = tuple(temp)
         return Tensor(value, local_gradients=local_gradients)
 
